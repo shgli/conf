@@ -451,6 +451,6 @@ __git_ps1 ()
 
 #. ~/.git-prompt.sh
 ## User specific environment and startup programs
-#PS1='[\[\e[0;32m\]\u \[\e[1;33m\]\W\[\e[1;34m\]$(__git_ps1 " (%s)") \[\033[0m\] ]\$ '
+#PS1='\[\e[0;32m\]\u@\H:\[\e[1;33m\]\w\[\e[1;34m\]$(__git_ps1 " (%s)") \[\033[0m\]\$ '
 #PATH=$PATH:$HOME/bin
 
