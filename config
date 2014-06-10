@@ -1,0 +1,6 @@
+host weinvest
+    hostname github.com
+    preferredauthentications publickey
+    identityfile ~/.ssh/weinvest
+
+
