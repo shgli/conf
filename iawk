@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+
+import re
+import os
+import sys
+import subprocess
+import exceptions
+import copy
+import tempfile
+from tabulate import tabulate
+
+fileName=sys.argv[-1]
+script=sys.argv[-2]
+
+sep = '\s+'
+for param in sys.argv:
+    if param.startswith('-F'):
+        sep = param[2:]
+        break
+
+try:
+    f = open(fileName,'r')
+    headers = re.split(sep, f.readline())
+    f.close()
+except exception.Exception,e:
+    print(e)
+    sys.exit(-1)
+
+index = 1
+for columnName in headers:
+    columnName = columnName.strip()
+    headers[index - 1] = columnName
+    #print("%s,%d" % (columnName, index))
+    script = script.replace('$' + columnName, '$' + str(index))
+    index += 1
+
+cmds = copy.deepcopy(sys.argv)
+cmds[0] = 'awk'
+cmds[-2] = script
+#print cmds
+tempFile = tempfile.TemporaryFile()
+subprocess.call(cmds, stdout=tempFile)
+tempFile.seek(0)
+
+columns = []
+for line in tempFile:
+    columns.append(re.split(sep, line))
+
+table = tabulate(columns, headers=headers,tablefmt='orgtbl')
+print table

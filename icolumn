@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+import os
+import sys
+import re
+from tabulate import tabulate
+fileName=sys.argv[-1]
+sep = '\s+'
+
+for index in range(0, len(sys.argv)):
+    param = sys.argv[index]
+    if param.startswith('-s'):
+        sep = sys.argv[index + 1]
+        break
+try:
+    f = open(fileName,'r')
+    headers = re.split(sep, f.readline())
+    headers = [columnName.strip() for columnName in headers]
+    columns = []
+    for line in f:
+        columns.append(re.split(sep, line))
+    f.close()
+except exception.Exception,e:
+    print(e)
+    sys.exit(-1)
+
+
+table = tabulate(columns, headers=headers,tablefmt='orgtbl')
+print table
+
