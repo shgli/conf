@@ -119,7 +119,10 @@ let Tlist_Exit_OnlyWindow=1 "当taglist是最后一个分割窗口时，自动�
 "let Tlist_Inc_Winwidth=0
 
 set nu "显示行号
+:set tabstop=4
+:set shiftwidth=4
 :set cindent shiftwidth=4
+:set expandtab
 let NERDShutUp=1
 
 :syntax enable			" enable syntax highlighting
